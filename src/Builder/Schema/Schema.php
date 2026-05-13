@@ -80,11 +80,11 @@ final class Schema
     {
         $out = [];
 
-        if ($this->required !== []) {
+        if ([] !== $this->required) {
             $out['required'] = $this->required;
         }
 
-        if ($this->sections !== []) {
+        if ([] !== $this->sections) {
             $out['sections'] = array_map(
                 static fn (Section $section): array => $section->meta(),
                 $this->sections,

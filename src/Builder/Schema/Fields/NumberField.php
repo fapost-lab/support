@@ -18,11 +18,6 @@ final class NumberField extends Field
 
     private int|float|null $max = null;
 
-    protected function type(): string
-    {
-        return 'number';
-    }
-
     public function min(int|float $value): self
     {
         $this->min = $value;
@@ -35,6 +30,11 @@ final class NumberField extends Field
         $this->max = $value;
 
         return $this;
+    }
+
+    protected function type(): string
+    {
+        return 'number';
     }
 
     protected function typeSpecificAttributes(): array

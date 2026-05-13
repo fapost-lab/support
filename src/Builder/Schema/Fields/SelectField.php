@@ -20,11 +20,6 @@ final class SelectField extends Field
      */
     private ?array $options = null;
 
-    protected function type(): string
-    {
-        return 'enum';
-    }
-
     /**
      * @param  array<int|string, mixed>  $options
      */
@@ -33,6 +28,11 @@ final class SelectField extends Field
         $this->options = $options;
 
         return $this;
+    }
+
+    protected function type(): string
+    {
+        return 'enum';
     }
 
     protected function typeSpecificAttributes(): array

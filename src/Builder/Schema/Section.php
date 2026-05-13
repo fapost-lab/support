@@ -24,7 +24,8 @@ final class Section
     public function __construct(
         public readonly string $key,
         public readonly string $label,
-    ) {}
+    ) {
+    }
 
     public static function make(string $key, string $label): self
     {
@@ -74,10 +75,10 @@ final class Section
     public function meta(): array
     {
         $meta = [
-            'key' => $this->key,
+            'key'   => $this->key,
             'label' => $this->label,
         ];
-        if ($this->icon !== null) {
+        if (null !== $this->icon) {
             $meta['icon'] = $this->icon;
         }
         $meta['fields'] = array_map(static fn (Field $field): string => $field->name, $this->fields);

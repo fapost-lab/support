@@ -12,8 +12,8 @@ use FAPost\Support\Builder\Schema\Fields\ObjectArrayField;
 use FAPost\Support\Builder\Schema\Fields\ObjectField;
 use FAPost\Support\Builder\Schema\Fields\SelectField;
 use FAPost\Support\Builder\Schema\Fields\StatePickerField;
-use FAPost\Support\Builder\Schema\Fields\TextField;
 use FAPost\Support\Builder\Schema\Fields\TextareaField;
+use FAPost\Support\Builder\Schema\Fields\TextField;
 use FAPost\Support\Builder\Schema\Fields\ToggleField;
 
 /**
@@ -46,9 +46,66 @@ abstract class Field
      */
     protected ?array $visibleWhen = null;
 
-    public function __construct(public readonly string $name) {}
+    public function __construct(public readonly string $name)
+    {
+    }
 
     abstract protected function type(): string;
+
+    public static function string(string $name): TextField
+    {
+        return new TextField($name);
+    }
+
+    public static function text(string $name): TextareaField
+    {
+        return new TextareaField($name);
+    }
+
+    public static function number(string $name): NumberField
+    {
+        return new NumberField($name);
+    }
+
+    public static function select(string $name): SelectField
+    {
+        return new SelectField($name);
+    }
+
+    public static function toggle(string $name): ToggleField
+    {
+        return new ToggleField($name);
+    }
+
+    public static function array(string $name): ArrayField
+    {
+        return new ArrayField($name);
+    }
+
+    public static function json(string $name): JsonField
+    {
+        return new JsonField($name);
+    }
+
+    public static function statePicker(string $name): StatePickerField
+    {
+        return new StatePickerField($name);
+    }
+
+    public static function keyValue(string $name): KeyValueField
+    {
+        return new KeyValueField($name);
+    }
+
+    public static function object(string $name): ObjectField
+    {
+        return new ObjectField($name);
+    }
+
+    public static function objectArray(string $name): ObjectArrayField
+    {
+        return new ObjectArrayField($name);
+    }
 
     public function label(string $label): static
     {
@@ -114,27 +171,27 @@ abstract class Field
     {
         $out = ['type' => $this->type()];
 
-        if ($this->label !== null) {
+        if (null !== $this->label) {
             $out['label'] = $this->label;
         }
         if ($this->required) {
             $out['required'] = true;
         }
-        if ($this->placeholder !== null) {
+        if (null !== $this->placeholder) {
             $out['placeholder'] = $this->placeholder;
         }
-        if ($this->default !== null) {
+        if (null !== $this->default) {
             $out['default'] = $this->default;
         }
-        if ($this->help !== null) {
+        if (null !== $this->help) {
             $out['help'] = $this->help;
         }
-        if ($this->visibleWhen !== null) {
+        if (null !== $this->visibleWhen) {
             $out['visible_when'] = $this->visibleWhen;
         }
 
         foreach ($this->typeSpecificAttributes() as $key => $value) {
-            if ($value === null) {
+            if (null === $value) {
                 continue;
             }
             $out[$key] = $value;
@@ -153,60 +210,5 @@ abstract class Field
     protected function typeSpecificAttributes(): array
     {
         return [];
-    }
-
-    public static function string(string $name): TextField
-    {
-        return new TextField($name);
-    }
-
-    public static function text(string $name): TextareaField
-    {
-        return new TextareaField($name);
-    }
-
-    public static function number(string $name): NumberField
-    {
-        return new NumberField($name);
-    }
-
-    public static function select(string $name): SelectField
-    {
-        return new SelectField($name);
-    }
-
-    public static function toggle(string $name): ToggleField
-    {
-        return new ToggleField($name);
-    }
-
-    public static function array(string $name): ArrayField
-    {
-        return new ArrayField($name);
-    }
-
-    public static function json(string $name): JsonField
-    {
-        return new JsonField($name);
-    }
-
-    public static function statePicker(string $name): StatePickerField
-    {
-        return new StatePickerField($name);
-    }
-
-    public static function keyValue(string $name): KeyValueField
-    {
-        return new KeyValueField($name);
-    }
-
-    public static function object(string $name): ObjectField
-    {
-        return new ObjectField($name);
-    }
-
-    public static function objectArray(string $name): ObjectArrayField
-    {
-        return new ObjectArrayField($name);
     }
 }

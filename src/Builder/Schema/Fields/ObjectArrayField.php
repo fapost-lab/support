@@ -23,11 +23,6 @@ final class ObjectArrayField extends Field
 
     private ?int $maxItems = null;
 
-    protected function type(): string
-    {
-        return 'object-array';
-    }
-
     /**
      * @param  array<int, Field>  $fields
      */
@@ -64,9 +59,14 @@ final class ObjectArrayField extends Field
         return $this;
     }
 
+    protected function type(): string
+    {
+        return 'object-array';
+    }
+
     protected function typeSpecificAttributes(): array
     {
-        $fieldsArr = [];
+        $fieldsArr    = [];
         $requiredKeys = [];
 
         foreach ($this->itemFields as $field) {
@@ -77,15 +77,15 @@ final class ObjectArrayField extends Field
         }
 
         $item = ['fields' => $fieldsArr];
-        if ($requiredKeys !== []) {
+        if ([] !== $requiredKeys) {
             $item['required'] = $requiredKeys;
         }
-        if ($this->itemLabel !== null) {
+        if (null !== $this->itemLabel) {
             $item['item_label'] = $this->itemLabel;
         }
 
         return [
-            'item' => $item,
+            'item'      => $item,
             'min_items' => $this->minItems,
             'max_items' => $this->maxItems,
         ];

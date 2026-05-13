@@ -17,11 +17,6 @@ final class KeyValueField extends Field
 
     private ?string $valueLabel = null;
 
-    protected function type(): string
-    {
-        return 'key-value';
-    }
-
     public function keyLabel(string $label): self
     {
         $this->keyLabel = $label;
@@ -36,10 +31,15 @@ final class KeyValueField extends Field
         return $this;
     }
 
+    protected function type(): string
+    {
+        return 'key-value';
+    }
+
     protected function typeSpecificAttributes(): array
     {
         return [
-            'key_label' => $this->keyLabel,
+            'key_label'   => $this->keyLabel,
             'value_label' => $this->valueLabel,
         ];
     }

@@ -16,11 +16,6 @@ final class TextField extends Field
 
     private ?string $regexMessage = null;
 
-    protected function type(): string
-    {
-        return 'string';
-    }
-
     /**
      * Inline regex validator. The renderer flags non-matching values
      * with a red rim + the supplied message, but doesn't block save —
@@ -28,16 +23,21 @@ final class TextField extends Field
      */
     public function regex(string $pattern, ?string $message = null): self
     {
-        $this->regex = $pattern;
+        $this->regex        = $pattern;
         $this->regexMessage = $message;
 
         return $this;
     }
 
+    protected function type(): string
+    {
+        return 'string';
+    }
+
     protected function typeSpecificAttributes(): array
     {
         return [
-            'regex' => $this->regex,
+            'regex'         => $this->regex,
             'regex_message' => $this->regexMessage,
         ];
     }

@@ -19,11 +19,6 @@ final class ObjectField extends Field
      */
     private array $fields = [];
 
-    protected function type(): string
-    {
-        return 'object';
-    }
-
     /**
      * @param  array<int, Field>  $fields
      */
@@ -34,9 +29,14 @@ final class ObjectField extends Field
         return $this;
     }
 
+    protected function type(): string
+    {
+        return 'object';
+    }
+
     protected function typeSpecificAttributes(): array
     {
-        $fieldsArr = [];
+        $fieldsArr    = [];
         $requiredKeys = [];
 
         foreach ($this->fields as $field) {
@@ -47,8 +47,8 @@ final class ObjectField extends Field
         }
 
         return [
-            'fields' => $fieldsArr,
-            'required' => $requiredKeys === [] ? null : $requiredKeys,
+            'fields'   => $fieldsArr,
+            'required' => [] === $requiredKeys ? null : $requiredKeys,
         ];
     }
 }
