@@ -4,30 +4,12 @@ declare(strict_types=1);
 
 namespace FAPost\Support\Builder\Schema;
 
-use FAPost\Support\Builder\Schema\Fields\ArrayField;
-use FAPost\Support\Builder\Schema\Fields\JsonField;
-use FAPost\Support\Builder\Schema\Fields\KeyValueField;
-use FAPost\Support\Builder\Schema\Fields\NumberField;
-use FAPost\Support\Builder\Schema\Fields\ObjectArrayField;
-use FAPost\Support\Builder\Schema\Fields\ObjectField;
-use FAPost\Support\Builder\Schema\Fields\SelectField;
-use FAPost\Support\Builder\Schema\Fields\StatePickerField;
-use FAPost\Support\Builder\Schema\Fields\TextareaField;
-use FAPost\Support\Builder\Schema\Fields\TextField;
-use FAPost\Support\Builder\Schema\Fields\ToggleField;
-
 /**
  * Abstract base for every config-schema field.
  *
  * Subclasses register a `type()` string that maps 1:1 to the Vue
  * renderer's `FIELD_COMPONENTS` table and may layer their own
  * type-specific attributes on top via {@see typeSpecificAttributes()}.
- *
- * Static factories on this class are the canonical entry points —
- * authors typically write `Field::string('url')->required()` rather
- * than `new TextField('url')`. The factory return types are concrete
- * so chainable methods stay typed (e.g. `min()` only available on
- * NumberField).
  */
 abstract class Field
 {
@@ -52,59 +34,9 @@ abstract class Field
 
     abstract protected function type(): string;
 
-    public static function string(string $name): TextField
+    public static function make(string $name): static
     {
-        return new TextField($name);
-    }
-
-    public static function text(string $name): TextareaField
-    {
-        return new TextareaField($name);
-    }
-
-    public static function number(string $name): NumberField
-    {
-        return new NumberField($name);
-    }
-
-    public static function select(string $name): SelectField
-    {
-        return new SelectField($name);
-    }
-
-    public static function toggle(string $name): ToggleField
-    {
-        return new ToggleField($name);
-    }
-
-    public static function array(string $name): ArrayField
-    {
-        return new ArrayField($name);
-    }
-
-    public static function json(string $name): JsonField
-    {
-        return new JsonField($name);
-    }
-
-    public static function statePicker(string $name): StatePickerField
-    {
-        return new StatePickerField($name);
-    }
-
-    public static function keyValue(string $name): KeyValueField
-    {
-        return new KeyValueField($name);
-    }
-
-    public static function object(string $name): ObjectField
-    {
-        return new ObjectField($name);
-    }
-
-    public static function objectArray(string $name): ObjectArrayField
-    {
-        return new ObjectArrayField($name);
+        return new static($name);
     }
 
     public function label(string $label): static
@@ -197,7 +129,33 @@ abstract class Field
             $out[$key] = $value;
         }
 
-        return $out;
+        return self::normalizeEnums($out);
+    }
+
+    /**
+     * Recursively unwrap any `UnitEnum` / `BackedEnum` in the structure.
+     *
+     * Backed enums emit their `value` (so callers can write
+     * `SendMessageContentType::Image` instead of `::Image->value`).
+     * Pure enums emit their `name`. Anything else is returned as-is.
+     */
+    private static function normalizeEnums(mixed $value): mixed
+    {
+        if ($value instanceof \BackedEnum) {
+            return $value->value;
+        }
+        if ($value instanceof \UnitEnum) {
+            return $value->name;
+        }
+        if (is_array($value)) {
+            $out = [];
+            foreach ($value as $k => $v) {
+                $out[$k] = self::normalizeEnums($v);
+            }
+            return $out;
+        }
+
+        return $value;
     }
 
     /**

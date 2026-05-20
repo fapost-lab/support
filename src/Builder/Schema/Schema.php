@@ -22,6 +22,11 @@ final class Schema
     private array $required = [];
 
     /**
+     * @var array<string, mixed>
+     */
+    private array $defaultConfig = [];
+
+    /**
      * @var array<int, Section>
      */
     private array $sections = [];
@@ -46,6 +51,18 @@ final class Schema
     public function required(array $names): self
     {
         $this->required = array_values($names);
+
+        return $this;
+    }
+
+    /**
+     * Default node config merged when a builder node is first created.
+     *
+     * @param  array<string, mixed>  $config
+     */
+    public function defaultConfig(array $config): self
+    {
+        $this->defaultConfig = $config;
 
         return $this;
     }
@@ -82,6 +99,10 @@ final class Schema
 
         if ([] !== $this->required) {
             $out['required'] = $this->required;
+        }
+
+        if ([] !== $this->defaultConfig) {
+            $out['default_config'] = $this->defaultConfig;
         }
 
         if ([] !== $this->sections) {
