@@ -2,7 +2,7 @@
   "name": "fapost/support",
   "description": "FAPost reusable Eloquent primitives — traits, base model, and model concerns",
   "type": "library",
-  "license": "proprietary",
+  "license": "Apache-2.0",
   "require": {
     "php": "^8.4",
     "illuminate/database": "^11.0 || ^12.0",
