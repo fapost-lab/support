@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FAPost\Support\Builder\Schema\Fields;
+namespace Fapost\Support\Builder\Schema\Fields;
 
-use FAPost\Support\Builder\Schema\Field;
+use Fapost\Support\Builder\Schema\Field;
 
 /**
  * Flow-state path input. Maps to the Vue `StatePickerField` component.
@@ -32,7 +32,7 @@ final class StatePickerField extends Field
     /**
      * Constrain suggestions to the given namespace prefixes. Accepts either
      * raw strings or `BackedEnum` cases (e.g.
-     * {@see \FAPost\Foundation\Flow\Enums\StateNamespace}). Field::toArray
+     * {@see \Fapost\Foundation\Flow\Enums\StateNamespace}). Field::toArray
      * normalises enums to their string values on serialisation.
      *
      * Switches the renderer to a strict dropdown over matching user-registered

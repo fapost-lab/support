@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAPost\Support\Builder\Schema;
+namespace Fapost\Support\Builder\Schema;
 
 /**
  * Root builder for the array shape returned by

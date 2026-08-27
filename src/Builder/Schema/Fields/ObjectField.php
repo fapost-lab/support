@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FAPost\Support\Builder\Schema\Fields;
+namespace Fapost\Support\Builder\Schema\Fields;
 
-use FAPost\Support\Builder\Schema\Field;
+use Fapost\Support\Builder\Schema\Field;
 
 /**
  * Nested group of fields under a single config key. Maps to the Vue

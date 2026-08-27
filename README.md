@@ -1,4 +1,4 @@
-# FAPost Support
+# FaPost Support
 
 `fapost/support` holds **reusable Eloquent primitives** — a base model, opt-in model concerns and
 the fluent config-schema builder. These are shared building blocks with no Core coupling, usable
@@ -21,7 +21,7 @@ by Core and by external Solutions/Plugins alike.
 ## Namespace
 
 ```
-FAPost\Support\   →  src/
+Fapost\Support\   →  src/
 ```
 
 ## What's inside

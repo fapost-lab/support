@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FAPost\Support\Concerns;
+namespace Fapost\Support\Concerns;
 
-use FAPost\Foundation\Contracts\ModelAttributeResolverInterface;
+use Fapost\Foundation\Contracts\ModelAttributeResolverInterface;
 use Illuminate\Database\Eloquent\Model;
 
 /**

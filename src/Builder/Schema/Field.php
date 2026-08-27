@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAPost\Support\Builder\Schema;
+namespace Fapost\Support\Builder\Schema;
 
 /**
  * Abstract base for every config-schema field.

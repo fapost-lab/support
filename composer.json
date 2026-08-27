@@ -1,25 +1,25 @@
 {
   "name": "fapost/support",
-  "description": "FAPost reusable Eloquent primitives — traits, base model, and model concerns",
+  "description": "FaPost reusable Eloquent primitives — traits, base model, and model concerns",
   "type": "library",
   "license": "Apache-2.0",
   "require": {
     "php": "^8.4",
     "illuminate/database": "^11.0 || ^12.0",
     "illuminate/support": "^11.0 || ^12.0",
-    "fapost/foundation": "*"
+    "fapost/foundation": "^0.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^11.0"
   },
   "autoload": {
     "psr-4": {
-      "FAPost\\Support\\": "src/"
+      "Fapost\\Support\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "FAPost\\Support\\Tests\\": "tests/"
+      "Fapost\\Support\\Tests\\": "tests/"
     }
   },
   "extra": {

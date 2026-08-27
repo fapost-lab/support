@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace FAPost\Support\Models;
+namespace Fapost\Support\Models;
 
-use FAPost\Support\Concerns\HasComputedAttributes;
-use FAPost\Support\Concerns\InteractWithBuilder;
-use FAPost\Support\Concerns\InteractWithUtilities;
+use Fapost\Support\Concerns\HasComputedAttributes;
+use Fapost\Support\Concerns\InteractWithBuilder;
+use Fapost\Support\Concerns\InteractWithUtilities;
 use Illuminate\Database\Eloquent\Model;
 
 /**

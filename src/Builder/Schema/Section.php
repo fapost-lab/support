@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAPost\Support\Builder\Schema;
+namespace Fapost\Support\Builder\Schema;
 
 /**
  * UI grouping inside a config schema. A section owns its own field

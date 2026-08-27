@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FAPost\Support\Concerns;
+namespace Fapost\Support\Concerns;
 
-use FAPost\Foundation\Contracts\ModelUtilityInterface;
+use Fapost\Foundation\Contracts\ModelUtilityInterface;
 
 /**
  * Delegates unknown method calls to a dedicated utility class.
