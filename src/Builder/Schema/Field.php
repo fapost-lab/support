@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Fapost\Support\Builder\Schema;
 
+use BackedEnum;
+use UnitEnum;
+
 /**
  * Abstract base for every config-schema field.
  *
@@ -133,6 +136,18 @@ abstract class Field
     }
 
     /**
+     * Hook for subclasses to contribute their own keys to the wire
+     * shape. Null values are filtered out so optional attributes don't
+     * pollute the output.
+     *
+     * @return array<string, mixed>
+     */
+    protected function typeSpecificAttributes(): array
+    {
+        return [];
+    }
+
+    /**
      * Recursively unwrap any `UnitEnum` / `BackedEnum` in the structure.
      *
      * Backed enums emit their `value` (so callers can write
@@ -141,10 +156,10 @@ abstract class Field
      */
     private static function normalizeEnums(mixed $value): mixed
     {
-        if ($value instanceof \BackedEnum) {
+        if ($value instanceof BackedEnum) {
             return $value->value;
         }
-        if ($value instanceof \UnitEnum) {
+        if ($value instanceof UnitEnum) {
             return $value->name;
         }
         if (is_array($value)) {
@@ -156,17 +171,5 @@ abstract class Field
         }
 
         return $value;
-    }
-
-    /**
-     * Hook for subclasses to contribute their own keys to the wire
-     * shape. Null values are filtered out so optional attributes don't
-     * pollute the output.
-     *
-     * @return array<string, mixed>
-     */
-    protected function typeSpecificAttributes(): array
-    {
-        return [];
     }
 }
