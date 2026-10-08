@@ -75,6 +75,18 @@ Schema::make()
 
 ## Testing
 
+## Code style
+
+Code is formatted with [Pint](https://laravel.com/docs/pint) using the repository's `pint.json`:
+
+```bash
+vendor/bin/pint
+```
+
+Every own property and own class constant is typed (`private string $x`, `public const string NAME = '…'`; PHP 8.4).
+The one exception is a property or constant that overrides an untyped member of a vendor parent class: it must stay
+untyped (PHP would fatal otherwise) and carries a PHPDoc `/** @var … */`.
+
 ## License
 
 Licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
