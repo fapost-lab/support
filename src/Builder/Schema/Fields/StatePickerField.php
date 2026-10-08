@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fapost\Support\Builder\Schema\Fields;
 
+use BackedEnum;
 use Fapost\Support\Builder\Schema\Field;
 
 /**
@@ -19,15 +20,10 @@ use Fapost\Support\Builder\Schema\Field;
  */
 final class StatePickerField extends Field
 {
-    /** @var list<string|\BackedEnum>|null */
+    /** @var list<string|BackedEnum>|null */
     private ?array $namespaces = null;
 
     private bool $searchable = false;
-
-    protected function type(): string
-    {
-        return 'state-picker';
-    }
 
     /**
      * Constrain suggestions to the given namespace prefixes. Accepts either
@@ -38,7 +34,7 @@ final class StatePickerField extends Field
      * Switches the renderer to a strict dropdown over matching user-registered
      * variables.
      *
-     * @param  list<string|\BackedEnum>  $namespaces
+     * @param  list<string|BackedEnum>  $namespaces
      */
     public function namespaces(array $namespaces): self
     {
@@ -56,6 +52,11 @@ final class StatePickerField extends Field
         $this->searchable = $searchable;
 
         return $this;
+    }
+
+    protected function type(): string
+    {
+        return 'state-picker';
     }
 
     /**

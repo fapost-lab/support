@@ -14,11 +14,6 @@ final class TextareaField extends Field
 {
     private bool $variablePicker = true;
 
-    protected function type(): string
-    {
-        return 'text';
-    }
-
     /**
      * Drop the inline variable picker. For text that never reaches runtime
      * (builder-only notes), an inserted `{{ ... }}` would never resolve, so
@@ -29,6 +24,11 @@ final class TextareaField extends Field
         $this->variablePicker = false;
 
         return $this;
+    }
+
+    protected function type(): string
+    {
+        return 'text';
     }
 
     /**

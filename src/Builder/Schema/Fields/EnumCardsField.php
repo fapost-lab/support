@@ -22,11 +22,6 @@ final class EnumCardsField extends Field
      */
     private ?array $options = null;
 
-    protected function type(): string
-    {
-        return 'enum-cards';
-    }
-
     /**
      * @param  list<array{value: string, label: string, icon?: string, hint?: string, accent?: string}>  $options
      */
@@ -35,6 +30,11 @@ final class EnumCardsField extends Field
         $this->options = $options;
 
         return $this;
+    }
+
+    protected function type(): string
+    {
+        return 'enum-cards';
     }
 
     /**

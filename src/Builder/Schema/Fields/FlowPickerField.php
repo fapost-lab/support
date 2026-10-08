@@ -20,11 +20,6 @@ final class FlowPickerField extends Field
 {
     private bool $excludeCurrent = true;
 
-    protected function type(): string
-    {
-        return 'flow-picker';
-    }
-
     /**
      * Whether to hide the current flow from the picker. Defaults to true —
      * a flow referencing itself (e.g. a `subflow` call) is almost always a
@@ -35,6 +30,11 @@ final class FlowPickerField extends Field
         $this->excludeCurrent = $exclude;
 
         return $this;
+    }
+
+    protected function type(): string
+    {
+        return 'flow-picker';
     }
 
     /**
